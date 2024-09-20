@@ -1,42 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Reservation } from '../models/reservation';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
 
-  constructor() {
-    this.reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
-    this.reservationID = this.reservations.length;
-  }
-
+  private apiULR = 'http://localhost:3001';
   private reservations: Reservation[] = [];
 
   private reservationID: number =  0;
 
+  constructor(private http: HttpClient) { }
+
   // CRUD operations
 
-  create(reservation: Reservation): void {
-    reservation.id = this.reservationID++;
-    this.reservations.push(reservation);
-    localStorage.setItem('reservations', JSON.stringify(this.reservations));
+  create(reservation: Reservation): Observable<void> {
+    return this.http.post<void>(this.apiULR + '/reservation', reservation);
   }
-  getReservations(): Reservation[] {
-    return this.reservations;
+  getReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(this.apiULR + '/reservations');
   }
-  delete(reservationId: number): void {
-    const index = this.reservations.findIndex(r => r.id === reservationId);
-    this.reservations.splice(index, 1);
-    localStorage.setItem('reservations', JSON.stringify(this.reservations));
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(this.apiULR + '/reservation/' + id);
   }
-  update(id: number, reservation: Reservation): void {
-    reservation.id = id;
-    const index = this.reservations.findIndex(r => r.id === id);
-    this.reservations[index] = reservation;
-    localStorage.setItem('reservations', JSON.stringify(this.reservations));
+  update(id: number, reservation: Reservation): Observable<void> {
+    return this.http.put<void>(this.apiULR + '/reservation/' + id, reservation);
   }
-  getReservation(id: number): Reservation | undefined {
-    return this.reservations.find(r => r.id === id);
+  getReservation(id: number): Observable<Reservation> {
+    return this.http.get<Reservation>(this.apiULR + '/reservation/' + id);
   }
 }

@@ -16,23 +16,23 @@
     <tbody>
         <tr *ngFor="let reservation of reservations">
             <td>
-            Guest: {{ reservation.guestName }}<br>
+                {{ reservation.guestName }}<br>
             </td>
             <td>
-            Email: {{ reservation.guestEmail }}<br>
+                {{ reservation.guestEmail }}<br>
             </td>
             <td>
-            Room No: {{ reservation.roomNumber }}<br>
+                {{ reservation.roomNumber }}<br>
             </td>
             <td>
-            Check In: {{ reservation.checkInDate }}<br>
+                {{ reservation.checkInDate }}<br>
             </td>
             <td>
-            Check Out: {{ reservation.checkOutDate }}<br>
+                {{ reservation.checkOutDate }}<br>
             </td>
             <td>
-            <button class="btn btn-sm btn-danger mx-1" (click)="deleteReservation(reservation.id)">Delete</button>
-            <button class="btn btn-sm btn-secondary mx-1" [routerLink]="['/edit', reservation.id]">Edit</button>
+                <button class="btn btn-sm btn-danger mx-1" (click)="deleteReservation(reservation.id)">Delete</button>
+                <button class="btn btn-sm btn-secondary mx-1" [routerLink]="['/edit', reservation.id]">Edit</button>
             </td>
         </tr>
     </tbody>
