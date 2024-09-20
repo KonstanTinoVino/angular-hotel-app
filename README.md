@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
 
-The project is "mocked" via a [mockoon](https://mockoon.com/). There isa [mockoon file](mockoon.json) provided with the configuration.
+The back-end is "mocked" via a [mockoon](https://mockoon.com/). There isa [mockoon file](mockoon.json) provided with the configuration.
 
 ## Development server
 
